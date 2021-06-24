@@ -1,0 +1,567 @@
+library(readxl)
+
+
+library(readxl)
+Indicadores <- read_excel("C:/Users/Admin/Downloads/Indicadores Fiscalía 31122020.xlsx", 
+                          range = "A8:g1632", 
+                          col_types = c("text", "numeric", "text", "numeric", "numeric", "numeric", "text"),
+                          sheet = "Ind 9")
+
+names(Indicadores)
+
+Indicadores <- Indicadores %>%
+  mutate(MES=factor(MES,
+                    levels=c("Enero", "Febrero", "Marzo","Abril", "Mayo", "Junio",
+                             "Julio", "Agosto", "Septiembre","Octubre", "Noviembre", "Diciembre")))
+
+
+Indicadores %>% 
+  group_by(MES) %>% 
+  summarise(Total=sum(`TOTAL DE MEDIDAS DE PROTECCIÓN EMITIDAS POR VIOLENCIA POR RAZÓN DE GÉNERO\r\n VIGENTES`, na.rm = T),
+            Trabajadas=sum(`MEDIDAS DE PROTECCIÓN EMITIDAS POR VIOLENCIA POR RAZÓN DE GÉNERO \r\nVIGENTES QUE FUERON TRABAJADAS`, na.rm=T),
+            Notificadas=sum(`MEDIDAS DE PROTECCIÓN EMITIDAS POR VIOLENCIA POR RAZÓN DE GÉNERO QUE FUERON NOTIFICADAS\r\nEFECTIVA Y PERSONALMENTE A LA PERSONA AGRESORA`, na.rm=T))
+
+
+
+
+
+
+
+#INDICADORES
+
+
+library(readxl)
+Indicadores <- read_excel("C:/Users/Admin/Downloads/Indicadores Fiscalía 31122020.xlsx", 
+                          range = "c8:g382", 
+                          col_types = c("text", "numeric", "numeric", "numeric", "numeric"),
+                          sheet = "Ind 12")
+
+names(Indicadores)
+
+Indicadores <- Indicadores %>%
+  mutate(MES=factor(MES,
+                    levels=c("Enero", "Febrero", "Marzo","Abril", "Mayo", "Junio",
+                             "Julio", "Agosto", "Septiembre","Octubre", "Noviembre", "Diciembre")))
+
+
+Indicadores %>% 
+  group_by(TRIMESTRE) %>% 
+  summarise(Total=sum(`TOTAL DE ÓRDENES DE PROTECCIÓN\r\n EMITIDAS VIGENTES`+ `TOTAL DE MEDIDAS DE PROTECCIÓN \r\nEMITIDAS VIGENTES`, na.rm = T),
+            Cociente=sum(`TOTAL DE CARPETAS DE INVESTIGACIÓN INICIADAS CONTRA PERSONAS AGRESORAS DERIVADOS DEL INCUMPLIMIENTO DE \r\nÓRDENES DE PROTECCIÓN`+ 
+                         `TOTAL DE CARPETAS DE INVESTIGACIÓN INICIADAS CONTRA PERSONAS AGRESORAS DERIVADOS DEL INCUMPLIMIENTO DE\r\n MEDIDAS DE PROTECCIÓN`, na.rm=T),
+            Indicador=(Cociente/Total)*100)
+
+
+Indicadores %>% 
+  group_by(TRIMESTRE) %>% 
+  summarise(Total=sum(`TOTAL DE ÓRDENES DE PROTECCIÓN\r\n EMITIDAS VIGENTES`, na.rm = T),
+            Cociente=sum(`TOTAL DE CARPETAS DE INVESTIGACIÓN INICIADAS CONTRA PERSONAS AGRESORAS DERIVADOS DEL INCUMPLIMIENTO DE \r\nÓRDENES DE PROTECCIÓN`, na.rm=T),
+            Indicador=(Cociente/Total)*100)
+
+Indicadores %>% 
+  group_by(TRIMESTRE) %>% 
+  summarise(Total=sum(`TOTAL DE MEDIDAS DE PROTECCIÓN \r\nEMITIDAS VIGENTES`, na.rm = T),
+            Cociente=sum(`TOTAL DE CARPETAS DE INVESTIGACIÓN INICIADAS CONTRA PERSONAS AGRESORAS DERIVADOS DEL INCUMPLIMIENTO DE\r\n MEDIDAS DE PROTECCIÓN`, na.rm=T),
+            Indicador=(Cociente/Total)*100)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#INDICADOR 13
+
+
+
+library(readxl)
+  Indicadores <- read_excel("C:/Users/Admin/Downloads/Indicadores Fiscalía 31122020.xlsx", 
+                            range = "c10:g1632", 
+                            col_types = c("text", "numeric", "numeric", "numeric", "numeric"),
+                            sheet = "Ind 13")
+  
+  names(Indicadores)
+  
+  Indicadores <- Indicadores %>%
+    mutate(Mes=factor(Mes,
+                      levels=c("Enero", "Febrero", "Marzo","Abril", "Mayo", "Junio",
+                               "Julio", "Agosto", "Septiembre","Octubre", "Noviembre", "Diciembre")))
+  
+  
+Indicadores %>% 
+  group_by(Mes) %>% 
+  summarise(Total=sum(`TOTAL DE ÓRDENES DE PROTECCIÓN EMITIDAS VIGENTES` + `TOTAL MEDIDAS DE PROTECCIÓN EMITIDAS VIGENTES`, na.rm = T),
+            Cociente=sum(`CASOS EN LOS QUE LA ORDEN DE PROTECCIÓN NO RESULTÓ SER ADECUADA Y EFECTIVA PARA LA VÍCTIMA\r\n(Casos de reincidencia)`+ 
+                           `CASOS EN LOS QUE LA MEDIDA DE PROTECCIÓN NO RESULTÓ SER ADECUADA Y EFECTIVA PARA LA VÍCTIMA\r\n(Casos de reincidencia)`, na.rm=T),
+            Indicador=(Total/Cociente)*100)->grou
+write.csv(grou, "grou.csv")
+
+  
+
+Indicadores %>% 
+  group_by(Mes) %>% 
+  summarise(Total=sum(`TOTAL DE ÓRDENES DE PROTECCIÓN EMITIDAS VIGENTES` , na.rm = T),
+            Cociente=sum(`CASOS EN LOS QUE LA ORDEN DE PROTECCIÓN NO RESULTÓ SER ADECUADA Y EFECTIVA PARA LA VÍCTIMA\r\n(Casos de reincidencia)`, na.rm=T),
+            Indicador=(Total/Cociente)*100)->grou
+write.csv(grou, "grou.csv")
+
+
+
+Indicadores %>% 
+  group_by(Mes) %>% 
+  summarise(Total=sum(`TOTAL MEDIDAS DE PROTECCIÓN EMITIDAS VIGENTES`, na.rm = T),
+            Cociente=sum(`CASOS EN LOS QUE LA MEDIDA DE PROTECCIÓN NO RESULTÓ SER ADECUADA Y EFECTIVA PARA LA VÍCTIMA\r\n(Casos de reincidencia)`, na.rm=T),
+            Indicador=(Total/Cociente)*100)->grou
+write.csv(grou, "grou.csv")
+
+
+
+
+
+
+
+
+
+#INDICADOR 16
+
+
+
+library(readxl)
+Indicadores <- read_excel("C:/Users/Admin/Downloads/Indicadores Fiscalía 31122020.xlsx", 
+                          range = "a8:g52", 
+                          sheet = "Ind 16")
+
+names(Indicadores)
+
+Indicadores <- Indicadores %>%
+  mutate(`RANGO DE EDAD`=factor(`RANGO DE EDAD`,
+                    levels=c("0 a 2 años", "3 a 5 años", "6 a 12 años", "13 a 17 años", "18 a 25 años", "26 a 35 años",
+                             "36 a 45 años", "46 a 59 años", "60 en adelante")))
+
+
+Indicadores %>% 
+  group_by(`RANGO DE EDAD`) %>% 
+  summarise(Total=sum(`TOTAL DE MUJERES QUE DENUNCIAN ABUSO SEXUAL INFANTIL` + `TOTAL DE MUJERES QUE DENUNCIAN VIOLACIÓN`, na.rm = T),
+            Cociente=sum(`TOTAL DE MUJERES CANALIZADAS PARA ATENCIÓN INTEGRAL DE LA SALUD (NOM 46) POR ABUSO SEXUAL INFANTIL`+ 
+                          `TOTAL DE MUJERES CANALIZADAS PARA ATENCIÓN INTEGRAL DE LA SALUD (NOM 46) POR VIOLACIÓN`, na.rm=T),
+            Indicador=(Cociente/Total)*100)->grou
+write.csv(grou, "grou.csv")
+
+
+
+
+
+Indicadores %>% 
+  group_by(`RANGO DE EDAD`) %>% 
+  summarise(Total=sum(`TOTAL DE MUJERES QUE DENUNCIAN ABUSO SEXUAL INFANTIL`, na.rm = T),
+            Cociente=sum(`TOTAL DE MUJERES CANALIZADAS PARA ATENCIÓN INTEGRAL DE LA SALUD (NOM 46) POR ABUSO SEXUAL INFANTIL`, na.rm=T),
+            Indicador=(Cociente/Total)*100)->grou
+write.csv(grou, "grou.csv")
+
+
+
+
+Indicadores %>% 
+  group_by(`RANGO DE EDAD`) %>% 
+  summarise(Total=sum(`TOTAL DE MUJERES QUE DENUNCIAN VIOLACIÓN`, na.rm = T),
+            Cociente=sum(`TOTAL DE MUJERES CANALIZADAS PARA ATENCIÓN INTEGRAL DE LA SALUD (NOM 46) POR VIOLACIÓN`, na.rm=T),
+            Indicador=(Cociente/Total)*100)->grou
+write.csv(grou, "grou.csv")
+
+
+
+
+
+
+#
+
+#
+
+#
+
+
+#INDICADOR 25
+
+library(readxl)
+Indicadores <- read_excel("C:/Users/Admin/Downloads/Indicadores Fiscalía 31122020.xlsx", 
+                          range = "c8:g382", 
+                          col_types = c("text", "numeric", "numeric", "numeric", "numeric"),
+                          sheet = "Ind 25x")
+
+names(Indicadores)
+
+Indicadores <- Indicadores %>%
+  mutate(MES=factor(MES,
+                    levels=c("Enero", "Febrero", "Marzo","Abril", "Mayo", "Junio",
+                             "Julio", "Agosto", "Septiembre","Octubre", "Noviembre", "Diciembre")))
+
+
+Indicadores %>% 
+  group_by(TRIMESTRE) %>% 
+  summarise(Total=sum(`TOTAL DE ÓRDENES DE PROTECCIÓN\r\n EMITIDAS VIGENTES`+ `TOTAL DE MEDIDAS DE PROTECCIÓN \r\nEMITIDAS VIGENTES`, na.rm = T),
+            Cociente=sum(`TOTAL DE MEDIDAS DE PROTECCIÓN \r\nEMITIDAS VIGENTES`+ 
+                           `TOTAL DE CARPETAS DE INVESTIGACIÓN INICIADAS CONTRA PERSONAS AGRESORAS DERIVADOS DEL INCUMPLIMIENTO DE\r\n MEDIDAS DE PROTECCIÓN`, na.rm=T),
+            Indicador=(Total/Cociente)*100)
+
+
+
+
+
+#
+#
+# Indicador 29
+
+#INDICADOR 25
+
+library(readxl)
+Indicadores <- read_excel("C:/Users/Admin/Downloads/Indicadores Fiscalía 31122020 AVANCES.xlsx", 
+                          range = "A9:CZ394", 
+                          sheet = "Ind 29",
+                          col_types = c("text", 
+                                        "numeric", "text", "numeric",
+                                        "numeric", "numeric", "numeric", 
+                                        "numeric", "numeric", "numeric", 
+                                        "numeric", "numeric", "numeric", 
+                                        "numeric", "numeric", "numeric", 
+                                        "numeric", "numeric", "numeric", 
+                                        "numeric", "numeric", "numeric", 
+                                        "numeric", "numeric", "numeric", 
+                                        "numeric", "numeric", "numeric", 
+                                        "numeric", "numeric", "numeric", 
+                                        "numeric", "numeric", "numeric", 
+                                        "numeric", "numeric", "numeric", 
+                                        "numeric", "numeric", "numeric", 
+                                        "numeric", "numeric", "numeric", 
+                                        "numeric", "numeric", "numeric", 
+                                        "numeric", "numeric", "numeric", 
+                                        "numeric", "numeric", "numeric", 
+                                        "numeric", "numeric", "numeric", 
+                                        "numeric", "numeric", "numeric", 
+                                        "numeric", "numeric", "numeric", 
+                                        "numeric", "numeric", "numeric", 
+                                        "numeric", "numeric", "numeric",
+                                        "numeric", "numeric", "numeric", 
+                                        "numeric", "numeric", "numeric", 
+                                        "numeric", "numeric", "numeric", 
+                                        "numeric", "numeric", "numeric", 
+                                        "numeric", "numeric", "numeric", 
+                                        "numeric", "numeric", "numeric",
+                                        "numeric", "numeric", "numeric", 
+                                        "numeric", "numeric", "numeric", 
+                                        "numeric", "numeric", "numeric", 
+                                        "numeric", "numeric", "numeric", 
+                                        "numeric", "numeric", "numeric", 
+                                        "numeric", "numeric", "numeric", "numeric"))
+
+names(Indicadores)
+
+
+Indicadores %>% 
+  filter(Semestre=="Enero a Junio") %>% 
+  group_by(MUNICIPIO) %>%
+  summarise(Total = sum(`VIOLACIÓN`,+
+                         `TENTATIVA DE VIOLACIÓN`,+
+                         `FEMINICIDIO`,+
+                         `TENTATIVA DE FEMINICIDIO`,+
+                         `SUICIDIO FEMINICIDA`,+
+                         `HOMICIDIO \r\n(MUERTE VIOLENTA DE MUJER)`,+
+                         `TENTATIVA DE HOMICIDIO`,+
+                         `DESAPARICIÓN *`,+
+                         `ABUSO SEXUAL INFANTIL`,+
+                         `CORRUPCIÓN DE MENORES`,+
+                         `ABUSO SEXUAL`,+
+                         `HOSTIGAMIENTO SEXUAL`,+
+                         `ACOSO SEXUAL`,+
+                         `VIOLACIÓN A LA INTIMIDAD SEXUAL`,+
+                         `CIBERACOSO`,+
+                         `TRATA`,+
+                         `VIOLENCIA FAMILIAR (FÍSICA)`,+
+                         `VIOLENCIA FAMILIAR (PSICOLÓGICA)`,+
+                         `VIOLENCIA FAMILIAR EQUIPARADA (FÍSICA)`,+
+                         `VIOLENCIA FAMILIAR EQUIPARADA (PSICOLÓGICA)`,+
+                         `AMENAZAS`,+
+                         `CHANTAJE`,+
+                         `EXTORSIÓN`,+
+                         `PRIVACIÓN ILEGAL DE LA LIBERTAD`,+
+                         `ULTRAJES A LA MORAL`,+
+                         `DELITOS CONTRA LA DIGNIDAD`,+
+                         `ABANDONO DE FAMILIARES`,+
+                         `LESIONES`,+
+                         `ALLANAMIENTO DE MORADA`,+
+                         `DAÑO A LAS COSAS`,+
+                         `PANDILLERISMO`,+
+                         `ROBO CALIFICADO`,+
+                         `TENTAIVA DE ROBO CALIFICADO`,+
+                         `ATAQUE PELIGROSO`, na.rm = T))->grou
+  
+
+
+
+
+
+
+Indicadores %>% 
+  select(MUNICIPIO, Año, Semestre,
+    ,grep("JUDICIALIZADAS", names(Indicadores), value=TRUE)) %>% 
+  filter(Semestre=="Julio a Diciembre") %>% 
+  #group_by(MUNICIPIO) %>%
+  summarise(Total = sum(`JUDICIALIZADAS...8`,+
+                          `JUDICIALIZADAS...14`,+
+                          `JUDICIALIZADAS...20`,+
+                          `JUDICIALIZADAS...26`,+
+                          `JUDICIALIZADAS...32`,+
+                          `JUDICIALIZADAS...38`,+
+                          `JUDICIALIZADAS...44`,+
+                          `JUDICIALIZADAS...50`,+
+                          `JUDICIALIZADAS...56`,+
+                          `JUDICIALIZADAS...62`,+
+                          `JUDICIALIZADAS...68`,+
+                          `JUDICIALIZADAS...74`,+
+                          `JUDICIALIZADAS...80`,+
+                          `JUDICIALIZADAS...86`,+
+                          `JUDICIALIZADAS...92`,+
+                          `JUDICIALIZADAS...98`,+
+                          `JUDICIALIZADAS...104`,+
+                          `JUDICIALIZADAS...11`,+
+                          `JUDICIALIZADAS...17`,+
+                          `JUDICIALIZADAS...23`,+
+                          `JUDICIALIZADAS...29`,+
+                          `JUDICIALIZADAS...35`,+
+                          `JUDICIALIZADAS...41`,+
+                          `JUDICIALIZADAS...47`,+
+                          `JUDICIALIZADAS...53`,+
+                          `JUDICIALIZADAS...59`,+
+                          `JUDICIALIZADAS...65`,+
+                          `JUDICIALIZADAS...71`,+
+                          `JUDICIALIZADAS...77`,+
+                          `JUDICIALIZADAS...83`,+
+                          `JUDICIALIZADAS...89`,+
+                          `JUDICIALIZADAS...95`,+
+                          `JUDICIALIZADAS...101`, na.rm = T))
+  
+
+Indicadores %>% 
+  select(MUNICIPIO, Año, Semestre,
+         ,grep("JUDICIALIZADAS", names(Indicadores), value=TRUE)) %>% 
+  filter(Semestre=="Enero a Junio") %>% 
+  #group_by(MUNICIPIO) %>%
+  summarise(Total = sum(`JUDICIALIZADAS...8`,+
+                          `JUDICIALIZADAS...14`,+
+                          `JUDICIALIZADAS...20`,+
+                          `JUDICIALIZADAS...26`,+
+                          `JUDICIALIZADAS...32`,+
+                          `JUDICIALIZADAS...38`,+
+                          `JUDICIALIZADAS...44`,+
+                          `JUDICIALIZADAS...50`,+
+                          `JUDICIALIZADAS...56`,+
+                          `JUDICIALIZADAS...62`,+
+                          `JUDICIALIZADAS...68`,+
+                          `JUDICIALIZADAS...74`,+
+                          `JUDICIALIZADAS...80`,+
+                          `JUDICIALIZADAS...86`,+
+                          `JUDICIALIZADAS...92`,+
+                          `JUDICIALIZADAS...98`,+
+                          `JUDICIALIZADAS...104`,+
+                          `JUDICIALIZADAS...11`,+
+                          `JUDICIALIZADAS...17`,+
+                          `JUDICIALIZADAS...23`,+
+                          `JUDICIALIZADAS...29`,+
+                          `JUDICIALIZADAS...35`,+
+                          `JUDICIALIZADAS...41`,+
+                          `JUDICIALIZADAS...47`,+
+                          `JUDICIALIZADAS...53`,+
+                          `JUDICIALIZADAS...59`,+
+                          `JUDICIALIZADAS...65`,+
+                          `JUDICIALIZADAS...71`,+
+                          `JUDICIALIZADAS...77`,+
+                          `JUDICIALIZADAS...83`,+
+                          `JUDICIALIZADAS...89`,+
+                          `JUDICIALIZADAS...95`,+
+                          `JUDICIALIZADAS...101`, na.rm = T))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Indicadores %>% 
+  select(MUNICIPIO, Año, Semestre,
+         ,grep("INICIADAS", names(Indicadores), value=TRUE)) %>% 
+  filter(Semestre=="Enero a Junio") %>% 
+  #group_by(MUNICIPIO) %>%
+  summarise(Total = sum(`INICIADAS...7`,+
+                          `INICIADAS...13`,+
+                          `INICIADAS...19`,+
+                          `INICIADAS...25`,+
+                          `INICIADAS...31`,+
+                          `INICIADAS...37`,+
+                          `INICIADAS...43`,+
+                          `INICIADAS...49`,+
+                          `INICIADAS...55`,+
+                          `INICIADAS...61`,+
+                          `INICIADAS...67`,+
+                          `INICIADAS...73`,+
+                          `INICIADAS...79`,+
+                          `INICIADAS...85`,+
+                          `INICIADAS...91`,+
+                          `INICIADAS...97`,+
+                          `INICIADAS...10`,+
+                          `INICIADAS...16`,+
+                          `INICIADAS...22`,+
+                          `INICIADAS...28`,+
+                          `INICIADAS...34`,+
+                          `INICIADAS...40`,+
+                          `INICIADAS...46`,+
+                          `INICIADAS...52`,+
+                          `INICIADAS...58`,+
+                          `INICIADAS...64`,+
+                          `INICIADAS...70`,+
+                          `INICIADAS...76`,+
+                          `INICIADAS...82`,+
+                          `INICIADAS...88`,+
+                          `INICIADAS...94`,+
+                          `INICIADAS...100`, na.rm = T))
+
+
+
+
+
+
+Indicadores %>% 
+  select(MUNICIPIO, Año, Semestre,
+         ,grep("INICIADAS", names(Indicadores), value=TRUE)) %>% 
+  filter(Semestre=="Julio a Diciembre") %>% 
+  #group_by(MUNICIPIO) %>%
+  summarise(Total = sum(`INICIADAS...7`,+
+                          `INICIADAS...13`,+
+                          `INICIADAS...19`,+
+                          `INICIADAS...25`,+
+                          `INICIADAS...31`,+
+                          `INICIADAS...37`,+
+                          `INICIADAS...43`,+
+                          `INICIADAS...49`,+
+                          `INICIADAS...55`,+
+                          `INICIADAS...61`,+
+                          `INICIADAS...67`,+
+                          `INICIADAS...73`,+
+                          `INICIADAS...79`,+
+                          `INICIADAS...85`,+
+                          `INICIADAS...91`,+
+                          `INICIADAS...97`,+
+                          `INICIADAS...10`,+
+                          `INICIADAS...16`,+
+                          `INICIADAS...22`,+
+                          `INICIADAS...28`,+
+                          `INICIADAS...34`,+
+                          `INICIADAS...40`,+
+                          `INICIADAS...46`,+
+                          `INICIADAS...52`,+
+                          `INICIADAS...58`,+
+                          `INICIADAS...64`,+
+                          `INICIADAS...70`,+
+                          `INICIADAS...76`,+
+                          `INICIADAS...82`,+
+                          `INICIADAS...88`,+
+                          `INICIADAS...94`,+
+                          `INICIADAS...100`, na.rm = T))
+                          
+
+
+
+
+Indicadores <- read_excel("C:/Users/Admin/Downloads/Indicadores Fiscalía 31122020.xlsx", 
+                          range = "A8:g1632", 
+               sheet = "Ind 9")
+
+names(Indicadores)
+
+Indicadores <- Indicadores %>%
+  mutate(MES=factor(MES,
+                    levels=c("Enero", "Febrero", "Marzo","Abril", "Mayo", "Junio",
+                             "Julio", "Agosto", "Septiembre","Octubre", "Noviembre", "Diciembre")))
+
+
+Indicadores %>%  
+  group_by(AÑO) %>% 
+  summarise(Total=  `TOTAL DE MEDIDAS DE PROTECCIÓN EMITIDAS POR VIOLENCIA POR RAZÓN DE GÉNERO\r\n VIGENTES`,
+            MEDIDAS=`MEDIDAS DE PROTECCIÓN EMITIDAS POR VIOLENCIA POR RAZÓN DE GÉNERO \r\nVIGENTES QUE FUERON TRABAJADAS`+
+              `MEDIDAS DE PROTECCIÓN EMITIDAS POR VIOLENCIA POR RAZÓN DE GÉNERO QUE FUERON NOTIFICADAS\r\nEFECTIVA Y PERSONALMENTE A LA PERSONA AGRESORA`, na.rm=T)
+
+
+
+
+
+
+
+library(readxl)
+Indicadores <- read_excel("C:/Users/Admin/Downloads/Indicadores Fiscalía 31122020.xlsx", 
+                          range = "A8:N137", 
+                          col_types = c("text", "text", "numeric", "numeric", "numeric", "numeric", "numeric", "numeric",
+                                        "numeric", "numeric", "numeric", "numeric", "numeric", "numeric"),
+                          sheet = "Ind 24")
+
+names(Indicadores)
+
+
+Indicadores %>% 
+  group_by(MUNICIPIO, INSTANCIA) %>% 
+  summarise(ene=sum(Enero , na.rm=T),
+            feb=sum(Febrero , na.rm=T),
+            mar=sum(Marzo , na.rm=T),
+            abr=sum(Abril , na.rm=T),
+            may=sum(Mayo , na.rm=T),
+            jun=sum(Junio , na.rm=T),
+            jul=sum(Julio , na.rm=T),
+            ago=sum(Agosto , na.rm=T),
+            sep=sum(Septiembre , na.rm=T),
+            oct=sum(Octubre , na.rm=T),
+            nov=sum(Noviembre , na.rm=T),
+            dic=sum(Diciembre, na.rm=T),
+            tot_acu=sum(ene+feb+mar+abr+ 
+                          may+ jun + jul+ ago+
+                          sep+ oct + nov + dic))->grou
+
+
+Indicadores <- Indicadores %>%
+  mutate(MES=factor(MES,
+                    levels=c("Enero", "Febrero", "Marzo","Abril", "Mayo", "Junio",
+                             "Julio", "Agosto", "Septiembre","Octubre", "Noviembre", "Diciembre")))
+
+
+Indicadores %>% 
+  group_by(MES) %>% 
+  summarise(Total=sum(`TOTAL DE MEDIDAS DE PROTECCIÓN EMITIDAS POR VIOLENCIA POR RAZÓN DE GÉNERO\r\n VIGENTES`, na.rm = T),
+            Trabajadas=sum(`MEDIDAS DE PROTECCIÓN EMITIDAS POR VIOLENCIA POR RAZÓN DE GÉNERO \r\nVIGENTES QUE FUERON TRABAJADAS`, na.rm=T),
+            Notificadas=sum(`MEDIDAS DE PROTECCIÓN EMITIDAS POR VIOLENCIA POR RAZÓN DE GÉNERO QUE FUERON NOTIFICADAS\r\nEFECTIVA Y PERSONALMENTE A LA PERSONA AGRESORA`, na.rm=T))
+
