@@ -1,0 +1,98 @@
+librery(mxmaps)
+
+victimas <- read.csv("~/R/R_ladies/IDVFC_NM_jun2021.csv", encoding="UTF8")
+
+names(victimas)[names(victimas) == "bien.jurídico.afectado"] <- "bien.juridico.afectado" #Modificación del nombre de una variable con acento del csv
+setnames(victimas, tolower(names(victimas))) #Poner los nombres de las variables en minusculas
+
+victimas_nacional_2021 <-  victimas %>% 
+  group_by(año,entidad, tipo.de.delito) %>% 
+  filter(tipo.de.delito=="Feminicidio",
+         año==2021) %>% 
+  summarise(ene=sum(enero, na.rm = T),
+            feb=sum(febrero, na.rm = T),
+            mar=sum(marzo, na.rm = T),
+            abr=sum(abril, na.rm = T),
+            may=sum(mayo, na.rm = T),
+            jun=sum(junio, na.rm = T),
+            jul=sum(julio, na.rm = T),
+            ago=sum(agosto, na.rm = T),
+            sept=sum(septiembre, na.rm = T),
+            oct=sum(octubre, na.rm = T),
+            nov=sum(noviembre, na.rm = T),
+            dic=sum(diciembre, na.rm = T),
+            tot_acu=sum(ene+feb+mar+abr+ 
+                          may+jun+jul+ago+
+                          sept+oct+nov+dic))
+
+
+data(df_mxstate_2020) #Base de una paquetería que contiene la información del Censo Nacional y que es necesaria para ponderar feminicidios por poblacion
+
+merge_1<-merge(victimas_nacional_2021, df_mxstate_2020, 
+               by.x="entidad", 
+               by.y="state_name_official") 
+
+
+merge_1$value<- merge_1$tot_acu
+
+write.csv(merge_1, "datosfeminicidios.csv")
+
+mxhexbin_choropleth(merge_1, num_colors = 1) +  
+  labs(title="Muertes violentas de mujeres tipificados como feminicidios.",
+       caption="Elaborado por R-Ladies GDL con base al SESNSP, 2020 (ENE-SEP) y Proyecciones de la población de CONAPO.",
+       x="", y="",
+       fill="Tasa") +
+  scale_fill_gradient(
+    low = "plum", 
+    high = "magenta4",
+    guide = "colourbar")+theme_minimal()+
+  theme(text=element_text(family="Roboto",
+                          face="plain",
+                          size=23,
+                          hjust = 0.5,
+                          vjust = 0.5),
+        legend.text = element_text(size=10, colour = "grey12"),
+        legend.title = element_text(color = "grey7", size = 13),
+        plot.title = element_text(hjust=0.5, size=15, face="plain", colour="grey6"),
+        plot.caption = element_text(hjust=-1, size=12, face="plain"),
+        plot.margin = margin(1, 1, 1, 1, "cm"))
+
+
+#Mapa hexagonal con tasas
+
+
+merge_1<- merge_1 %>% 
+  group_by(entidad) %>% 
+  summarise(value=(value/pop)*100000)
+
+
+
+write.csv(merge_1, "datosfeminicidios_tasa.csv")
+
+merge_2<- merge(merge_1, df_mxstate_2020, 
+                by.x="entidad", 
+                by.y="state_name_official")
+
+mxhexbin_choropleth(merge_2, num_colors = 1) +  
+  labs(title="Muertes violentas de mujeres tipificados como feminicidios.",
+       caption="Elaborado por R-Ladies GDL con base al SESNSP, 2020 (ENE-SEP) y Proyecciones de la población de CONAPO.",
+       x="", y="",
+       fill="Tasa") +
+  scale_fill_gradient(
+    low = "plum", 
+    high = "magenta4",
+    guide = "colourbar")+theme_minimal()+
+  theme(text=element_text(family="Roboto",
+                          face="plain",
+                          size=23,
+                          hjust = 0.5,
+                          vjust = 0.5),
+        legend.text = element_text(size=10, colour = "grey12"),
+        legend.title = element_text(color = "grey7", size = 13),
+        plot.title = element_text(hjust=0.5, size=15, face="plain", colour="grey6"),
+        plot.caption = element_text(hjust=-1, size=12, face="plain"),
+        plot.margin = margin(1, 1, 1, 1, "cm"))
+
+
+
+
