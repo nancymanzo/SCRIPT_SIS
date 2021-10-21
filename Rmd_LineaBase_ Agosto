@@ -1,0 +1,451 @@
+---
+title: "INDICADORES DE LA ALERTA DE VIOLENCIA DE GÉNERO CONTRA LAS MUJERES DEL ESTADO DE JALISCO"
+author: "Fecha a Agosto 2020"
+date: "`r Sys.Date()`"
+output:
+  prettydoc::html_pretty:
+    theme: leonids
+    highlight: github
+---
+```{r, , include=F, warning=F, echo=F}
+
+library(prettydoc)
+library(readxl)
+library(dplyr)
+library(DT)
+library(scales)
+```
+
+
+```{r, include=FALSE}
+indicador_6 <- read_excel("indicadores_181021.xlsx", sheet = "Ind 6")
+indicador_7 <- read_excel("indicadores_181021.xlsx", sheet = "Ind 7")
+indicador_9 <- read_excel("indicadores_181021.xlsx", sheet = "Ind 9")
+indicador_10 <- read_excel("indicadores_181021.xlsx", sheet = "Ind 10")
+indicador_11 <- read_excel("indicadores_181021.xlsx", sheet = "Ind 11")
+indicador_12 <- read_excel("indicadores_181021.xlsx", sheet = "Ind 12")
+indicador_13 <- read_excel("indicadores_181021.xlsx", sheet = "Ind 13")
+indicador_16 <- read_excel("indicadores_181021.xlsx", sheet = "Ind 16")
+
+indicador_24 <- read_excel("indicadores_181021.xlsx", sheet = "Ind 24")
+indicador_25 <- read_excel("indicadores_181021.xlsx", sheet = "Ind 25")
+indicador_26 <- read_excel("indicadores_181021.xlsx", sheet = "Ind 26")
+indicador_27 <- read_excel("indicadores_181021.xlsx", sheet = "Ind 27")
+indicador_28 <- read_excel("indicadores_181021.xlsx", sheet = "Ind 28")
+indicador_30 <- read_excel("indicadores_181021.xlsx", sheet = "Ind 30")
+indicador_31 <- read_excel("indicadores_181021.xlsx", sheet = "Ind 31")
+
+
+indicador_32 <- read_excel("indicadores_181021.xlsx", sheet = "Ind 32")
+indicador_33 <- read_excel("indicadores_181021.xlsx", sheet = "Ind 33")
+indicador_34 <- read_excel("indicadores_181021.xlsx", sheet = "Ind 34")
+indicador_35 <- read_excel("indicadores_181021.xlsx", sheet = "Ind 35")
+indicador_36 <- read_excel("indicadores_181021.xlsx", sheet = "Ind 36")
+indicador_37 <- read_excel("indicadores_181021.xlsx", sheet = "Ind 37")
+indicador_38 <- read_excel("indicadores_181021.xlsx", sheet = "Ind 38")
+indicador_39 <- read_excel("indicadores_181021.xlsx", sheet = "Ind  39")
+indicador_40 <- read_excel("indicadores_181021.xlsx", sheet = "Ind 40")
+```
+
+
+```{r, include=FALSE}
+indicador_6 %>%
+  mutate(MES=factor(MES,
+                    levels=c("Enero", "Febrero", "Marzo","Abril", "Mayo", "Junio","Julio", "Agosto")))->indicador_6
+```
+
+```{r, include=FALSE}
+
+  
+indicador_6 %>%
+      group_by(MES) %>% 
+  summarise(`MUJERES VÍCTIMAS DE VIOLENCIA DE GÉNERO`=sum(`TOTAL DE MUJERES VÍCTIMAS DE VIOLENCIA DE GÉNERO ATENDIDAS`),
+            `ORDENES DE PROTECCIÓN`=sum(`TOTAL DE MUJERES CANALIZADAS PARA OTORGAMIENTO DE ORDENES DE PROTECCIÓN`),
+            `MEDIDAS DE PROTECCIÓN`=sum(`TOTAL DE MUJERES CANALIZADAS PARA OTORGAMIENTO DE MEDIDAS DE PROTECCIÓN`),
+            `LÍNEA BASE`=scales::percent(sum((`ORDENES DE PROTECCIÓN`+`MEDIDAS DE PROTECCIÓN`)/`MUJERES VÍCTIMAS DE VIOLENCIA DE GÉNERO`), 0.1)) -> tabla_6
+```
+
+# Indicador 6
+### Porcentaje de mujeres víctimas de violencia por razones de género atendidas y canalizadas para otorgamiento de orden de protección y/o medidas de protección.
+###### Informacion mensual del año 2021 a agosto para el cálculo de la línea base del indicador.
+
+```{r, include=T, echo=F}
+tabla_6 %>% datatable(filter="top", options = list(pageLength = 16))
+```
+
+# Indicador 7
+### Porcentaje de mujeres víctimas de violencia por razones de género que solicitaron y obtuvieron orden y/o medida de protección.
+
+```{r, include=FALSE, echo=F}
+indicador_7 %>%
+  mutate(MES=factor(MES,
+                    levels=c("Enero", "Febrero", "Marzo","Abril", "Mayo", "Junio","Julio", "Agosto")))->indicador_7
+  
+indicador_7 %>% 
+      group_by(MES) %>% 
+  summarise(`MUJERES VÍCTIMAS DE VIOLENCIA DE GÉNERO`=sum(`TOTAL DE MUJERES VÍCTIMAS DE VIOLENCIA DE GÉNERO ATENDIDAS`),
+            `TOTAL DE MUJERES VÍCTIMAS DE VIOLENCIA DE GÉNERO QUE SOLICITARON UNA MEDIDA DE PROTECCIÓN SIN TENER UNA CANALIZACIÓN FORMAL`=sum(`TOTAL DE MUJERES VÍCTIMAS DE VIOLENCIA DE GÉNERO QUE SOLICITARON UNA MEDIDA DE PROTECCIÓN SIN TENER UNA CANALIZACIÓN FORMAL`),
+            `TOTAL DE MUJERES VÍCTIMAS DE VIOLENCIA DE GÉNERO QUE SOLICITARON UNA ORDEN DE PROTECCIÓN SIN TENER UNA CANALIZACIÓN FORMAL`=sum(`TOTAL DE MUJERES VÍCTIMAS DE VIOLENCIA DE GÉNERO QUE SOLICITARON UNA ORDEN DE PROTECCIÓN SIN TENER UNA CANALIZACIÓN FORMAL`),
+            `LÍNEA BASE`=scales::percent(sum(`TOTAL DE MUJERES VÍCTIMAS DE VIOLENCIA DE GÉNERO QUE SOLICITARON UNA MEDIDA DE PROTECCIÓN SIN TENER UNA CANALIZACIÓN FORMAL`/`MUJERES VÍCTIMAS DE VIOLENCIA DE GÉNERO`), 0.1)) -> tabla_7
+```
+      
+
+```{r, include=T, echo=F}
+tabla_7 %>% datatable(filter="top", options = list(pageLength = 16))
+
+```
+
+# Indicador 9
+### Porcentaje de medidas de protección otorgadas que fueron trabajadas y/o notificadas efectiva y personalmente a la persona agresora en relación al total.
+
+```{r , include=FALSE, echo=F}
+indicador_9 %>%
+  mutate(MES=factor(MES,
+                    levels=c("Enero", "Febrero", "Marzo","Abril", "Mayo", "Junio","Julio", "Agosto")))->indicador_9
+  
+indicador_9 %>% 
+      group_by(MES) %>% 
+  summarise(`TOTAL DE MEDIDAS DE PROTECCIÓN EMITIDAS POR VIOLENCIA POR RAZÓN DE GÉNERO VIGENTES`=sum(`TOTAL DE MEDIDAS DE PROTECCIÓN EMITIDAS POR VIOLENCIA POR RAZÓN DE GÉNERO VIGENTES`),
+            
+            `MEDIDAS DE PROTECCIÓN EMITIDAS POR VIOLENCIA POR RAZÓN DE GÉNERO VIGENTES QUE FUERON TRABAJADAS`=sum(`MEDIDAS DE PROTECCIÓN EMITIDAS POR VIOLENCIA POR RAZÓN DE GÉNERO VIGENTES QUE FUERON TRABAJADAS`),
+            
+            `MEDIDAS DE PROTECCIÓN EMITIDAS POR VIOLENCIA POR RAZÓN DE GÉNERO QUE FUERON NOTIFICADAS EFECTIVA Y PERSONALMENTE A LA PERSONA AGRESORA`=sum(`MEDIDAS DE PROTECCIÓN EMITIDAS POR VIOLENCIA POR RAZÓN DE GÉNERO QUE FUERON NOTIFICADAS EFECTIVA Y PERSONALMENTE A LA PERSONA AGRESORA`),
+            
+            `LÍNEA BASE`=scales::percent(sum(`MEDIDAS DE PROTECCIÓN EMITIDAS POR VIOLENCIA POR RAZÓN DE GÉNERO VIGENTES QUE FUERON TRABAJADAS`+ `MEDIDAS DE PROTECCIÓN EMITIDAS POR VIOLENCIA POR RAZÓN DE GÉNERO QUE FUERON NOTIFICADAS EFECTIVA Y PERSONALMENTE A LA PERSONA AGRESORA`)/`TOTAL DE MEDIDAS DE PROTECCIÓN EMITIDAS POR VIOLENCIA POR RAZÓN DE GÉNERO VIGENTES`, 0.1)) -> tabla_9
+```
+      
+
+```{r, include=T, echo=F}
+tabla_9 %>% datatable(filter="top", options = list(pageLength = 16))
+
+```
+
+# Indicador 10
+### Porcentaje de órdenes de protección otorgadas que fueron trabajadas y/o notificadas efectiva y personalmente a la persona agresora en relación al total.
+
+
+```{r , include=FALSE, echo=F}
+indicador_10 %>%
+  mutate(MES=factor(MES,
+                    levels=c("Enero", "Febrero", "Marzo","Abril", "Mayo", "Junio","Julio", "Agosto")))->indicador_10
+  
+indicador_10 %>% 
+      group_by(MES) %>% 
+  summarise(`TOTAL DE ÓRDENES DE PROTECCIÓN EMITIDAS POR VIOLENCIA POR RAZÓN DE GÉNERO`=sum(`TOTAL DE ÓRDENES DE PROTECCIÓN EMITIDAS POR VIOLENCIA POR RAZÓN DE GÉNERO`),
+            
+            `ÓRDENES DE PROTECCIÓN EMITIDAS POR VIOLENCIA POR RAZÓN DE GÉNERO QUE FUERON TRABAJADAS`=sum(`ÓRDENES DE PROTECCIÓN EMITIDAS POR VIOLENCIA POR RAZÓN DE GÉNERO QUE FUERON TRABAJADAS`),
+            
+            `ÓRDENES DE PROTECCIÓN EMITIDAS POR VIOLENCIA POR RAZÓN DE GÉNERO QUE FUERON NOTIFICADAS EFECTIVA Y PERSONALMENTE A LA PERSONA AGRESORA`=sum(`ÓRDENES DE PROTECCIÓN EMITIDAS POR VIOLENCIA POR RAZÓN DE GÉNERO QUE FUERON NOTIFICADAS EFECTIVA Y PERSONALMENTE A LA PERSONA AGRESORA`),
+            
+            `LÍNEA BASE`=scales::percent(sum(`ÓRDENES DE PROTECCIÓN EMITIDAS POR VIOLENCIA POR RAZÓN DE GÉNERO QUE FUERON TRABAJADAS`+ `ÓRDENES DE PROTECCIÓN EMITIDAS POR VIOLENCIA POR RAZÓN DE GÉNERO QUE FUERON NOTIFICADAS EFECTIVA Y PERSONALMENTE A LA PERSONA AGRESORA`)/`TOTAL DE ÓRDENES DE PROTECCIÓN EMITIDAS POR VIOLENCIA POR RAZÓN DE GÉNERO`, 0.1)) -> tabla_10
+```
+      
+
+```{r, include=T, echo=F}
+tabla_10 %>% datatable(filter="top", options = list(pageLength = 16))
+
+```
+
+# Indicador 11
+### Porcentaje de mujeres que han recibido seguimiento después de otorgada su orden y/o medida de protección en relación al total.
+
+```{r , include=FALSE, echo=F}
+indicador_11 %>%
+  mutate(MES=factor(MES,
+                    levels=c("Enero", "Febrero", "Marzo","Abril", "Mayo", "Junio","Julio", "Agosto")))->indicador_11
+  
+indicador_11 %>% 
+      group_by(MES) %>% 
+  summarise(`MUJERES CON MEDIDAS DE PROTECCIÓN VIGENTES QUE HAN RECIBIDO SEGUIMIENTO`=sum(`MUJERES CON MEDIDAS DE PROTECCIÓN VIGENTES QUE HAN RECIBIDO SEGUIMIENTO`),
+            
+            `MUJERES CON ÓRDENES DE PROTECCIÓN VIGENTES QUE HAN RECIBIDO SEGUIMIENTO`=sum(`MUJERES CON ÓRDENES DE PROTECCIÓN VIGENTES QUE HAN RECIBIDO SEGUIMIENTO`),
+            
+            `TOTAL DE MUJERES CON MEDIDAS DE PROTECCIÓN VIGENTES`=sum(`TOTAL DE MUJERES CON MEDIDAS DE PROTECCIÓN VIGENTES`),
+            
+            `TOTAL DE MUJERES CON ÓRDENES DE PROTECCIÓN VIGENTES`=sum(`TOTAL DE MUJERES CON ÓRDENES DE PROTECCIÓN VIGENTES`),
+            
+            `LÍNEA BASE`=scales::percent(sum((`MUJERES CON MEDIDAS DE PROTECCIÓN VIGENTES QUE HAN RECIBIDO SEGUIMIENTO`+ `MUJERES CON ÓRDENES DE PROTECCIÓN VIGENTES QUE HAN RECIBIDO SEGUIMIENTO`)/(`TOTAL DE MUJERES CON MEDIDAS DE PROTECCIÓN VIGENTES` +`TOTAL DE MUJERES CON ÓRDENES DE PROTECCIÓN VIGENTES`)), 0.1)) -> tabla_11
+```
+      
+
+```{r, include=T, echo=F}
+tabla_11 %>% datatable(filter="top", options = list(pageLength = 16))
+
+```
+
+# Indicador 12
+### Porcentaje de Carpetas de Investigación iniciadas contra personas agresoras derivados de incumplimiento de órdenes y/o medidas de protección.
+
+```{r , include=FALSE, echo=F}
+indicador_12 %>%
+  mutate(MES=factor(MES,
+                    levels=c("Enero", "Febrero", "Marzo","Abril", "Mayo", "Junio","Julio", "Agosto")))->indicador_12
+  
+indicador_12 %>% 
+      group_by(MES) %>% 
+  summarise(`TOTAL DE MEDIDAS DE PROTECCIÓN EMITIDAS VIGENTES`=sum(`TOTAL DE MEDIDAS DE PROTECCIÓN EMITIDAS VIGENTES`),
+            
+            `TOTAL DE CARPETAS DE INVESTIGACIÓN INICIADAS CONTRA PERSONAS AGRESORAS DERIVADOS DEL INCUMPLIMIENTO DE MEDIDAS DE PROTECCIÓN`=sum(`TOTAL DE CARPETAS DE INVESTIGACIÓN INICIADAS CONTRA PERSONAS AGRESORAS DERIVADOS DEL INCUMPLIMIENTO DE MEDIDAS DE PROTECCIÓN`),
+            
+            `TOTAL DE ÓRDENES DE PROTECCIÓN EMITIDAS VIGENTES`=sum(`TOTAL DE ÓRDENES DE PROTECCIÓN EMITIDAS VIGENTES`),
+            
+            `TOTAL DE CARPETAS DE INVESTIGACIÓN INICIADAS CONTRA PERSONAS AGRESORAS DERIVADOS DEL INCUMPLIMIENTO DE ÓRDENES DE PROTECCIÓN`=sum(`TOTAL DE CARPETAS DE INVESTIGACIÓN INICIADAS CONTRA PERSONAS AGRESORAS DERIVADOS DEL INCUMPLIMIENTO DE ÓRDENES DE PROTECCIÓN`),
+            
+            `LÍNEA BASE`=scales::percent(sum((`TOTAL DE CARPETAS DE INVESTIGACIÓN INICIADAS CONTRA PERSONAS AGRESORAS DERIVADOS DEL INCUMPLIMIENTO DE MEDIDAS DE PROTECCIÓN`+ `TOTAL DE CARPETAS DE INVESTIGACIÓN INICIADAS CONTRA PERSONAS AGRESORAS DERIVADOS DEL INCUMPLIMIENTO DE ÓRDENES DE PROTECCIÓN`)/(`TOTAL DE MEDIDAS DE PROTECCIÓN EMITIDAS VIGENTES` +`TOTAL DE ÓRDENES DE PROTECCIÓN EMITIDAS VIGENTES`)), 0.1)) -> tabla_12
+```
+      
+
+```{r, include=T, echo=F}
+tabla_12 %>% datatable(filter="top", options = list(pageLength = 16))
+
+```
+
+
+# Indicador 13
+### Porcentaje de casos en los que la orden y/o medida de protección resultó ser adecuada y efectiva para la víctima en relación al total.
+
+```{r , include=FALSE, echo=F}
+
+
+indicador_13 %>%
+  mutate(MES=factor(Mes,
+                    levels=c("Enero", "Febrero", "Marzo","Abril", "Mayo", "Junio","Julio", "Agosto")))->indicador_13
+  
+indicador_13 %>% 
+      group_by(MES) %>% 
+  summarise(`TOTAL MEDIDAS DE PROTECCIÓN EMITIDAS VIGENTES`=sum(`TOTAL MEDIDAS DE PROTECCIÓN EMITIDAS VIGENTES`),
+            
+            `CASOS EN LOS QUE LA MEDIDA DE PROTECCIÓN NO RESULTÓ SER ADECUADA Y EFECTIVA PARA LA VÍCTIMA (Casos de reincidencia)`=sum(`CASOS EN LOS QUE LA MEDIDA DE PROTECCIÓN NO RESULTÓ SER ADECUADA Y EFECTIVA PARA LA VÍCTIMA (Casos de reincidencia)`),
+            
+            `TOTAL DE ÓRDENES DE PROTECCIÓN EMITIDAS VIGENTES`=sum(`TOTAL DE ÓRDENES DE PROTECCIÓN EMITIDAS VIGENTES`),
+            
+            `CASOS EN LOS QUE LA ORDEN DE PROTECCIÓN NO RESULTÓ SER ADECUADA Y EFECTIVA PARA LA VÍCTIMA (Casos de reincidencia)`=sum(`CASOS EN LOS QUE LA ORDEN DE PROTECCIÓN NO RESULTÓ SER ADECUADA Y EFECTIVA PARA LA VÍCTIMA (Casos de reincidencia)`),
+            
+            `LÍNEA BASE`=scales::percent(sum((`CASOS EN LOS QUE LA MEDIDA DE PROTECCIÓN NO RESULTÓ SER ADECUADA Y EFECTIVA PARA LA VÍCTIMA (Casos de reincidencia)`+ `CASOS EN LOS QUE LA ORDEN DE PROTECCIÓN NO RESULTÓ SER ADECUADA Y EFECTIVA PARA LA VÍCTIMA (Casos de reincidencia)`)/(`TOTAL MEDIDAS DE PROTECCIÓN EMITIDAS VIGENTES` +`TOTAL DE ÓRDENES DE PROTECCIÓN EMITIDAS VIGENTES`)), 0.1)) -> tabla_13
+```
+      
+
+```{r, include=T, echo=F}
+tabla_13 %>% datatable(filter="top", options = list(pageLength = 16))
+
+```
+
+# Indicador 16
+### Porcentaje de mujeres denunciantes de violación o abuso sexual infantil que son remitidas para atención integral de la salud conforme a la NOM 046 en relación al total.
+
+
+```{r , include=FALSE, echo=F}
+
+
+indicador_16 %>%
+  mutate(MES=factor(Mes,
+                    levels=c("Enero", "Febrero", "Marzo","Abril", "Mayo", "Junio","Julio", "Agosto")))->indicador_16
+  
+indicador_16 %>% 
+      group_by(MES) %>% 
+  summarise(`TOTAL DE MUJERES QUE DENUNCIAN ABUSO SEXUAL INFANTIL`=sum(`TOTAL DE MUJERES QUE DENUNCIAN ABUSO SEXUAL INFANTIL`),
+            
+            `"TOTAL DE MUJERES CANALIZADAS PARA ATENCIÓN INTEGRAL DE LA SALUD (NOM 46) POR ABUSO SEXUAL INFANTIL`=sum(`TOTAL DE MUJERES CANALIZADAS PARA ATENCIÓN INTEGRAL DE LA SALUD (NOM 46) POR ABUSO SEXUAL INFANTIL`),
+            
+            `TOTAL DE MUJERES QUE DENUNCIAN VIOLACIÓN`=sum(`TOTAL DE MUJERES QUE DENUNCIAN VIOLACIÓN`),
+            
+            `TOTAL DE MUJERES CANALIZADAS PARA ATENCIÓN INTEGRAL DE LA SALUD (NOM 46) POR VIOLACIÓN`=sum(`TOTAL DE MUJERES CANALIZADAS PARA ATENCIÓN INTEGRAL DE LA SALUD (NOM 46) POR VIOLACIÓN`),
+            
+            `LÍNEA BASE`=scales::percent(sum((`TOTAL DE MUJERES CANALIZADAS PARA ATENCIÓN INTEGRAL DE LA SALUD (NOM 46) POR ABUSO SEXUAL INFANTIL`+ `TOTAL DE MUJERES CANALIZADAS PARA ATENCIÓN INTEGRAL DE LA SALUD (NOM 46) POR VIOLACIÓN`)/(`TOTAL DE MUJERES QUE DENUNCIAN ABUSO SEXUAL INFANTIL` +`TOTAL DE MUJERES QUE DENUNCIAN VIOLACIÓN`)), 0.1)) -> tabla_16
+```
+      
+
+```{r, include=T, echo=F}
+tabla_16 %>% datatable(filter="top", options = list(pageLength = 16))
+
+```
+
+
+
+# Indicador 24
+### Porcentaje de municipios que actualizan la información sobre atención a mujeres víctimas de violencia con respecto al total.
+
+```{r , include=FALSE, echo=F}
+
+
+indicador_24 %>%
+  mutate(MES=factor(MES,
+                    levels=c("Enero", "Febrero", "Marzo","Abril", "Mayo", "Junio","Julio", "Agosto"))) %>% 
+         mutate(ACTUALIZAN=case_when(
+           ACTUALIZAN=="Si"~1,
+           ACTUALIZAN=="No"~0)) %>% 
+         
+         mutate(INSTANCIA=case_when(
+           INSTANCIA==NA ~ 0,
+           INSTANCIA==NA_character_~ 0,
+           T~1))->indicador_24
+  
+indicador_24 %>% 
+      group_by(MES) %>% 
+  summarise(ACTUALIZAN=sum(ACTUALIZAN),
+            
+            INSTANCIA=sum(INSTANCIA),
+            
+            `LÍNEA BASE`=scales::percent(sum(ACTUALIZAN/INSTANCIA), 0.1)) -> tabla_24
+```
+      
+
+```{r, include=T, echo=F}
+tabla_24 %>% datatable(filter="top", options = list(pageLength = 16))
+
+```
+
+# Indicador 25
+### Porcentaje del personal responsable de la actualización del banco de datos adecuadamente capacitado con relación al total.
+##### Aquí checar los porcentajes totales, verificar.
+
+```{r , include=FALSE, echo=F}
+
+
+indicador_25 %>%
+  mutate(MES=factor(MES,
+                    levels=c("Enero", "Febrero", "Marzo","Abril", "Mayo", "Junio","Julio", "Agosto"))) ->indicador_25
+  
+indicador_25 %>% 
+      group_by(MES) %>% 
+  summarise(`PERSONAL RESPONSABLE DE LA ACTUALIZACIÓN DE DATOS`=sum(`PERSONAL RESPONSABLE DE LA ACTUALIZACIÓN DE DATOS`),
+            
+            `PERSONAS DEBIDAMENTE CAPACITADAS DE ALIMENTAR BANAVIM`=sum(`PERSONAS DEBIDAMENTE CAPACITADAS DE ALIMENTAR BANAVIM`),
+            
+            `LÍNEA BASE`=scales::percent(sum(`PERSONAS DEBIDAMENTE CAPACITADAS DE ALIMENTAR BANAVIM`/`PERSONAL RESPONSABLE DE LA ACTUALIZACIÓN DE DATOS`), 0.1)) -> tabla_25
+```
+      
+
+```{r, include=T, echo=F}
+tabla_25 %>% datatable(filter="top", options = list(pageLength = 16))
+
+```
+
+
+
+# Indicador 26
+### Porcentaje de instancias estatales responsables de alimentar banco de datos que actualizan en tiempo y forma en relación al total de instancias obligadas.
+
+
+```{r , include=FALSE, echo=F}
+
+
+indicador_26 %>%
+  mutate(MES=factor(MES,
+                    levels=c("Enero", "Febrero", "Marzo","Abril", "Mayo", "Junio","Julio", "Agosto"))) %>% 
+  mutate(ACTUALIZACIÓN=case_when(
+           ACTUALIZACIÓN=="Si"~1,
+           ACTUALIZACIÓN=="No"~0)) ->indicador_26
+  
+
+
+indicador_26 %>% 
+      group_by(MES) %>% 
+  summarise(ACTUALIZACIÓN=sum(ACTUALIZACIÓN),
+           `LÍNEA BASE`=scales::percent(sum(ACTUALIZACIÓN/7), 0.1)) -> tabla_26
+```
+      
+
+```{r, include=T, echo=F}
+tabla_26 %>% datatable(filter="top", options = list(pageLength = 16))
+
+```
+
+
+# Indicador 27
+### Número de opiniones técnicas que ha emitido la Dirección de Análisis y Contexto sobre los delitos de feminicidio y desaparición de niñas, adolescentes y mujeres.
+
+
+```{r , include=FALSE, echo=F}
+
+
+indicador_27 %>%
+  mutate(MES=factor(MES,
+                    levels=c("Enero", "Febrero", "Marzo","Abril", "Mayo", "Junio","Julio", "Agosto")))->indicador_27
+  
+
+
+indicador_27 %>% 
+      group_by(MES) %>% 
+  summarise(`NÚMERO DE CASOS ANALIZADOS`=sum(`NÚMERO DE CASOS ANALIZADOS`),
+            `TOTAL OPINIONES TÉCNICAS`=sum(`TOTAL OPINIONES TÉCNICAS`),
+           `LÍNEA BASE`=scales::percent(sum(`NÚMERO DE CASOS ANALIZADOS`/`TOTAL OPINIONES TÉCNICAS`), 0.1)) -> tabla_27
+```
+      
+
+```{r, include=T, echo=F}
+tabla_27 %>% datatable(filter="top", options = list(pageLength = 16))
+
+```
+
+# Indicador 28
+### Porcentaje de mujeres víctimas de violación y violencia familiar que son atendidas y proceden a realizar una denuncia en los Centros de Justicia para las Mujeres, en relación al total de mujeres atendidas en los Centros de Justicia para las Mujeres
+
+```{r , include=FALSE, echo=F}
+
+
+indicador_28 %>%
+  mutate(MES=factor(MES,
+                    levels=c("Enero", "Febrero", "Marzo","Abril", "Mayo", "Junio","Julio", "Agosto")))->indicador_28
+  
+
+
+indicador_28 %>% 
+      group_by(MES) %>% 
+  summarise(`MUJERES QUE REALIZAN UNA DENUNCIA POR EL DELITO DE VIOLACION`=sum(`MUJERES QUE REALIZAN UNA DENUNCIA POR EL DELITO DE VIOLACION`),
+            `MUJERES ATENDIDAS EN EL CJM`=sum(`MUJERES ATENDIDAS EN EL CJM`),
+            `MUJERES QUE REALIZAN UNA DENUNCIA POR EL DELITO DE VIOLENCIA FAMILIAR`=sum(`MUJERES QUE REALIZAN UNA DENUNCIA POR EL DELITO DE VIOLENCIA FAMILIAR`),
+           `LÍNEA BASE`=scales::percent(sum((`MUJERES QUE REALIZAN UNA DENUNCIA POR EL DELITO DE VIOLACION`+ `MUJERES QUE REALIZAN UNA DENUNCIA POR EL DELITO DE VIOLENCIA FAMILIAR`)/`MUJERES ATENDIDAS EN EL CJM`), 0.1)) -> tabla_28
+```
+      
+
+```{r, include=T, echo=F}
+tabla_28 %>% datatable(filter="top", options = list(pageLength = 16))
+
+```
+
+
+# Indicador 30
+### Porcentaje de sentencias por el delito de feminicidio en relación a los casos vinculados a proceso.
+
+```{r , include=FALSE, echo=F}
+
+#PENDIENTE
+```
+      
+
+```{r, include=T, echo=F}
+indicador_30 %>% datatable(filter="top", options = list(pageLength = 16))
+
+```
+
+
+
+# Indicador 31
+### Porcentaje de niñas, adolescentes y mujeres denunciadas como desaparecidas que son localizadas.
+
+#### Es necesario homologar ¿cómo? :(
+
+```{r , include=FALSE, echo=F}
+
+
+indicador_31 %>%
+  mutate(MES=factor(MES,
+                    levels=c("Enero", "Febrero", "Marzo","Abril", "Mayo", "Junio","Julio", "Agosto")))->indicador_31
+  
+
+
+indicador_31 %>% 
+      group_by(MES) %>% 
+  summarise(`TOTAL DE MUJERES`=sum(TOTAL),
+           `LÍNEA BASE`=(sum(TOTAL))) -> tabla_31
+```
+      
+
+```{r, include=T, echo=F}
+tabla_31 %>% datatable(filter="top", options = list(pageLength = 16))
+
+```
+
+
+...
